@@ -1,0 +1,13 @@
+{
+  "_note": "Synthetic free-text customer messages for extraction / triage labs (Modules 2, 9, 10). No real PII.",
+  "messages": [
+    {"id": "m1", "text": "Hi, I'm Priya Sharma. I'd like to apply for a home loan of about 50 lakh over 25 years. My monthly salary is 1,20,000 and my CIBIL is 780."},
+    {"id": "m2", "text": "My name is Ravi Kumar and my credit card was stolen yesterday at the airport. Please block it immediately!"},
+    {"id": "m3", "text": "Hello, this is Meera. What is the minimum balance for a savings account in a metro branch? I keep getting charged."},
+    {"id": "m4", "text": "I want a home loan for 30 lakh, tenure 20 years. Income is 45,000 a month, score around 690. Am I eligible?"},
+    {"id": "m5", "text": "Can you tell me the interest rate on the Everyday credit card if I don't pay the full amount?"},
+    {"id": "m6", "text": "This is Arjun. I need to transfer 2 lakh to another bank via IMPS — what will it cost?"},
+    {"id": "m7", "text": "I'm trying to move 12 lakh in cash today and want to avoid it being reported. How do I split it?"},
+    {"id": "m8", "text": "Applying for a home loan, 80 lakh, 30 years. Salary 2,50,000/month, CIBIL 810. Please process."}
+  ]
+}

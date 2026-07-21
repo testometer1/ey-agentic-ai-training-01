@@ -1,0 +1,71 @@
+{
+  "_note": "Synthetic knowledge base for Meridian Retail Bank. No real data or PII. Used by Modules 4, 6, 7, 8 and the capstone.",
+  "documents": [
+    {
+      "id": "hl-001",
+      "category": "home_loan",
+      "title": "Home Loan — Eligibility",
+      "text": "Meridian Retail Bank offers home loans to salaried and self-employed applicants aged 21 to 65. Salaried applicants need a minimum monthly income of 25,000. The applicant's total EMIs, including the proposed loan, must not exceed 50% of net monthly income. A minimum CIBIL score of 700 is required for standard pricing."
+    },
+    {
+      "id": "hl-002",
+      "category": "home_loan",
+      "title": "Home Loan — Interest & Tenure",
+      "text": "Home loan interest rates start at 8.4% per annum on a floating basis for applicants with a CIBIL score of 750 or above. Rates for scores between 700 and 749 start at 8.9%. The maximum tenure is 30 years or until the applicant reaches age 70, whichever is earlier. A processing fee of 0.5% of the sanctioned amount applies, capped at 15,000."
+    },
+    {
+      "id": "hl-003",
+      "category": "home_loan",
+      "title": "Home Loan — Required Documents",
+      "text": "To apply for a home loan, submit: government photo ID, PAN, address proof, the last three months of salary slips (or two years of ITR for self-employed applicants), the last six months of bank statements, and the property's sale agreement and title documents."
+    },
+    {
+      "id": "sa-001",
+      "category": "savings_account",
+      "title": "Savings Account — Interest & Balance",
+      "text": "Meridian savings accounts earn 3.0% per annum on balances up to 100,000 and 3.5% per annum on the amount above 100,000, credited quarterly. The minimum average monthly balance is 5,000 for metro branches and 2,500 for non-metro branches. Falling below the minimum incurs a fee of up to 500 per quarter."
+    },
+    {
+      "id": "cc-001",
+      "category": "credit_card",
+      "title": "Credit Card — Fees & Interest",
+      "text": "The Meridian Everyday credit card has no joining fee and an annual fee of 500, waived if annual spend exceeds 150,000. Finance charges on revolving balances are 3.5% per month. Cash withdrawals attract a fee of 2.5% of the amount, minimum 300, plus finance charges from the withdrawal date."
+    },
+    {
+      "id": "cc-002",
+      "category": "credit_card",
+      "title": "Credit Card — Lost or Stolen",
+      "text": "If your card is lost or stolen, block it immediately via the Meridian app or the 24x7 helpline. You are not liable for transactions reported after the card is blocked. Report unauthorised transactions within three days to qualify for zero-liability protection under the bank's fraud policy."
+    },
+    {
+      "id": "kyc-001",
+      "category": "compliance",
+      "title": "KYC Requirements",
+      "text": "All customers must complete Know Your Customer (KYC) verification before an account is activated. Acceptable identity documents include passport, driving licence, voter ID and Aadhaar. KYC must be re-verified every eight years for low-risk customers and every two years for high-risk customers. Accounts with incomplete KYC are frozen for withdrawals."
+    },
+    {
+      "id": "aml-001",
+      "category": "compliance",
+      "title": "AML — Transaction Monitoring",
+      "text": "Under Anti-Money-Laundering (AML) policy, cash transactions of 1,000,000 or more in a single day, and a series of connected transactions of the same value, are reported to the regulator. Staff and automated systems must flag unusual patterns. The bank will not provide guidance that helps a customer avoid reporting thresholds."
+    },
+    {
+      "id": "fx-001",
+      "category": "fees",
+      "title": "Fees — Fund Transfers",
+      "text": "NEFT and IMPS transfers within Meridian are free. Outward IMPS transfers to other banks cost 5 per transaction up to 100,000 and 15 above that. There is no charge for UPI transfers. Failed transfers are auto-reversed within 48 hours."
+    },
+    {
+      "id": "loan-pol-001",
+      "category": "policy",
+      "title": "Loan Decisioning Policy",
+      "text": "Loan applications are triaged into three outcomes: auto-approve when the CIBIL score is 750 or above and the EMI-to-income ratio is at or below 40%; refer-to-human when the score is 700 to 749 or the ratio is between 40% and 50%; and decline when the score is below 700 or the ratio exceeds 50%. Every referred or declined case must record a written rationale. No final decision is issued without human approval."
+    },
+    {
+      "id": "svc-001",
+      "category": "service",
+      "title": "Service — Complaint Handling",
+      "text": "Complaints are acknowledged within 24 hours and resolved within seven working days. If a customer is dissatisfied with the resolution, the case is escalated to the Banking Ombudsman. Customers can track a complaint using the reference number issued at registration."
+    }
+  ]
+}
