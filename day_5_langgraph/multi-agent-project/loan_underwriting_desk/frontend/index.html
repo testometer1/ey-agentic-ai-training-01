@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Meridian Bank · Loan Underwriting Desk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+:root{
+  --bg:#070911; --panel:rgba(22,28,48,.66); --panel2:rgba(16,21,38,.8);
+  --line:rgba(120,140,200,.16); --line2:rgba(120,140,200,.28);
+  --ink:#eef2ff; --mid:#9aa8d0; --low:#66739b;
+  --credit:#6366f1; --policy:#a855f7; --fraud:#f5a524; --cyan:#22d3ee;
+  --approve:#22c55e; --decline:#f43f5e; --refer:#f5a524;
+  --sans:'Inter',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);min-height:100vh;overflow-x:hidden}
+/* animated aurora background */
+body::before{content:"";position:fixed;inset:-20% -10% auto;height:120vh;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(900px 520px at 12% 4%, #3b3b93 0%, transparent 60%),
+    radial-gradient(820px 500px at 92% 0%, #6d29a3 0%, transparent 58%),
+    radial-gradient(700px 500px at 60% 100%, #123b6e 0%, transparent 60%);
+  filter:blur(30px);opacity:.55;animation:drift 16s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate3d(-2%,-1%,0) scale(1)}to{transform:translate3d(2%,2%,0) scale(1.08)}}
+.wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:28px 22px 70px}
+
+/* header */
+.hd{display:flex;align-items:center;gap:14px}
+.logo{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:24px;
+  background:linear-gradient(140deg,#6366f1,#a855f7);box-shadow:0 8px 26px #6366f166, inset 0 1px 0 #ffffff44}
+.hd h1{font-size:23px;font-weight:800;margin:0;letter-spacing:-.02em}
+.hd p{margin:3px 0 0;color:var(--mid);font-size:13.5px;max-width:66ch}
+.live{margin-left:auto;display:flex;align-items:center;gap:7px;font-size:12px;color:var(--mid);
+  font-weight:600;background:var(--panel);border:1px solid var(--line);padding:7px 12px;border-radius:999px}
+.live .pulse{width:8px;height:8px;border-radius:50%;background:#3a4467}
+.live.on .pulse{background:var(--approve);box-shadow:0 0 0 0 #22c55e88;animation:beat 1.3s infinite}
+@keyframes beat{0%{box-shadow:0 0 0 0 #22c55e88}70%{box-shadow:0 0 0 7px #22c55e00}100%{box-shadow:0 0 0 0 #22c55e00}}
+
+/* stepper */
+.stepper{display:flex;align-items:center;margin:22px 0 4px;padding:14px 18px;
+  background:var(--panel);border:1px solid var(--line);border-radius:16px;backdrop-filter:blur(14px)}
+.step{display:flex;align-items:center;gap:9px;color:var(--low);font-size:12.5px;font-weight:600}
+.step .bub{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:14px;
+  background:#10152a;border:1px solid var(--line2);transition:.4s}
+.step.working .bub{border-color:var(--c);color:#fff;background:linear-gradient(140deg,var(--c),transparent);
+  box-shadow:0 0 0 4px color-mix(in srgb,var(--c) 20%,transparent);animation:beat2 1.2s infinite}
+.step.done .bub{border-color:var(--approve);color:var(--approve);background:#0f2a1b}
+.step.working,.step.done{color:var(--ink)}
+@keyframes beat2{50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--c) 0%,transparent)}}
+.conn{flex:1;height:2px;margin:0 12px;border-radius:2px;background:var(--line2);position:relative;overflow:hidden}
+.conn::after{content:"";position:absolute;inset:0;width:0;background:linear-gradient(90deg,var(--credit),var(--policy));transition:width .5s}
+.conn.fill::after{width:100%}
+@media(max-width:760px){                             /* on narrow windows keep the stepper compact, no scroll */
+  .stepper{padding:12px}
+  .step{font-size:0;gap:0}                           /* hide labels, keep the numbered bubbles */
+  .step .bub{font-size:13px}
+  .conn{margin:0 6px}
+  .hd h1{font-size:19px}
+}
+
+.grid{display:grid;grid-template-columns:322px minmax(0,1fr);gap:20px;margin-top:20px}
+.grid>*{min-width:0}                                 /* let columns shrink instead of overflowing */
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:20px;
+  backdrop-filter:blur(16px);box-shadow:0 20px 50px #0008, inset 0 1px 0 #ffffff10}
+
+/* form */
+.field{margin-bottom:13px}
+.field label{display:block;font-size:11.5px;color:var(--mid);margin-bottom:6px;font-weight:600;letter-spacing:.02em}
+.field input{width:100%;background:#0c1122;border:1px solid var(--line2);border-radius:11px;color:var(--ink);
+  padding:11px 13px;font-size:14px;font-family:var(--sans);transition:.15s}
+.field input:focus{outline:none;border-color:var(--credit);box-shadow:0 0 0 3px #6366f133;background:#0e1428}
+.run{width:100%;margin-top:8px;padding:13px;border:0;border-radius:13px;cursor:pointer;color:#fff;
+  font-weight:700;font-size:15px;font-family:var(--sans);letter-spacing:.01em;position:relative;overflow:hidden;
+  background:linear-gradient(90deg,#6366f1,#a855f7);box-shadow:0 10px 30px #6d34c355;transition:transform .12s,filter .2s}
+.run:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.08)}
+.run:active:not(:disabled){transform:translateY(0)}
+.run:disabled{opacity:.65;cursor:default}
+.run .shim{position:absolute;inset:0;background:linear-gradient(90deg,transparent,#ffffff40,transparent);
+  transform:translateX(-120%)}
+.run.busy .shim{animation:shim 1.1s linear infinite}
+@keyframes shim{to{transform:translateX(120%)}}
+
+/* agent cards */
+.agent{position:relative;background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:15px 17px;
+  margin-bottom:14px;opacity:.5;transform:translateY(8px);transition:.45s cubic-bezier(.2,.7,.3,1);overflow:hidden}
+.agent::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c);opacity:.3}
+.agent.active{opacity:1;transform:none;border-color:color-mix(in srgb,var(--c) 40%,var(--line))}
+.agent.active::before{opacity:1;box-shadow:0 0 18px var(--c)}
+.agent.working{box-shadow:0 0 0 1px color-mix(in srgb,var(--c) 35%,transparent), 0 10px 40px color-mix(in srgb,var(--c) 15%,transparent)}
+.ag-top{display:flex;align-items:center;gap:12px}
+.ag-av{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px;flex:0 0 auto;
+  background:linear-gradient(140deg,color-mix(in srgb,var(--c) 55%,#0c1122),#0c1122);border:1px solid var(--line2)}
+.ag-name{font-weight:700;font-size:15.5px}
+.ag-role{font-size:11px;color:var(--low);text-transform:uppercase;letter-spacing:.09em}
+.pill{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:5px 10px;border-radius:999px;
+  text-transform:uppercase;background:#0e1428;color:var(--low);border:1px solid var(--line2)}
+.pill.working{color:#0a0f1e;background:var(--c);border-color:transparent;display:flex;align-items:center;gap:6px}
+.pill.done{color:var(--approve);background:#0f2a1b;border-color:#1e5b3a}
+.dots{display:inline-flex;gap:3px}.dots i{width:4px;height:4px;border-radius:50%;background:#0a0f1e;animation:bob .9s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes bob{50%{transform:translateY(-3px);opacity:.6}}
+.tools{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.tool{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;font-family:var(--mono);font-size:12px;color:var(--mid);
+  background:#0b1020;border:1px solid var(--line);border-radius:9px;padding:7px 10px;overflow-wrap:anywhere;word-break:break-word;
+  animation:slidein .35s cubic-bezier(.2,.7,.3,1)}
+@keyframes slidein{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:none}}
+.tool .tn{color:var(--ink);font-weight:500}
+.tool .out{color:var(--low);overflow-wrap:anywhere;flex:1 1 auto;min-width:120px}
+.tool .tick{color:var(--approve)}
+.spinr{width:12px;height:12px;border:2px solid var(--line2);border-top-color:var(--c);border-radius:50%;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.verdict{margin-top:11px;font-size:13px;line-height:1.5;color:var(--mid);
+  border-top:1px dashed var(--line);padding-top:10px}
+.verdict b{color:var(--ink)}
+
+/* console */
+.console{margin-top:6px;background:#080b16;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.console .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--line);
+  background:#0b1020;font-size:12px;color:var(--mid);font-weight:600}
+.console .bar .d{width:11px;height:11px;border-radius:50%}
+.log{height:210px;overflow-y:auto;padding:12px 14px;font-family:var(--mono);font-size:12px;line-height:1.75}
+.log .ln{display:flex;gap:10px;animation:fade .25s}
+.log .msg{min-width:0;overflow-wrap:anywhere;word-break:break-word}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.log .ts{color:#3f4a70;flex:0 0 auto}
+.log .msg{color:var(--mid)}
+.log .start .msg{color:var(--cyan)} .log .tool .msg{color:#c4b5fd} .log .result .msg{color:#7dd3a8}
+.log .done .msg{color:var(--approve);font-weight:600} .log .super .msg,.log .refer .msg{color:var(--refer);font-weight:600}
+.log .decision .msg{color:var(--ink);font-weight:700}
+.log .empty{color:var(--low)}
+
+/* decision */
+.decision{margin-top:16px;border-radius:18px;padding:22px 24px;border:1px solid var(--line);position:relative;overflow:hidden;
+  background:var(--panel);animation:pop .45s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.decision .big{font-size:28px;font-weight:800;letter-spacing:-.02em;display:flex;align-items:center;gap:11px}
+.decision .sub{color:var(--mid);margin-top:7px;font-size:14px}
+.decision.approve{border-color:var(--approve)}.decision.approve .big{color:var(--approve)}
+.decision.approve::after{content:"";position:absolute;inset:0;background:radial-gradient(500px 200px at 20% 0,#22c55e22,transparent)}
+.decision.decline{border-color:var(--decline)}.decision.decline .big{color:var(--decline)}
+.decision.decline::after{content:"";position:absolute;inset:0;background:radial-gradient(500px 200px at 20% 0,#f43f5e22,transparent)}
+.decision.refer{border-color:var(--refer)}.decision.refer .big{color:var(--refer)}
+.gate{display:flex;gap:12px;margin-top:18px;position:relative}
+.gate button{flex:1;padding:14px;border:0;border-radius:13px;font-weight:700;font-size:15px;cursor:pointer;
+  font-family:var(--sans);transition:transform .12s,filter .2s}
+.gate button:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.yes{background:linear-gradient(90deg,#16a34a,#22c55e);color:#04140d}
+.no{background:linear-gradient(90deg,#e11d48,#f43f5e);color:#fff}
+.empty-r{color:var(--low);text-align:center;padding:56px 20px;font-size:14.5px}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState, useRef, useEffect} = React;
+const API = "http://127.0.0.1:8500";                 // the backend (server.py). Change if you run it elsewhere.
+const META = {
+  credit:{name:"Credit Analyst", role:"Agent 1 · assesses creditworthiness", icon:"🧑‍💼", c:"var(--credit)"},
+  policy:{name:"Policy Officer",  role:"Agent 2 · checks lending policy",     icon:"📋", c:"var(--policy)"},
+  fraud: {name:"Fraud Investigator", role:"Agent 3 · hunts for red flags",    icon:"🕵️", c:"var(--fraud)"},
+};
+const IDS = ["credit","policy","fraud"];
+const blank = () => ({credit:agent(), policy:agent(), fraud:agent()});
+function agent(){ return {status:"idle", tools:[], verdict:""}; }
+const fmtArgs = a => Object.entries(a||{}).map(([k,v])=>`${k}=${v}`).join(", ");
+const now = () => { const d=new Date(); return d.toTimeString().slice(0,8)+"."+String(d.getMilliseconds()).padStart(3,"0"); };
+
+function Pill({status, c}){
+  if(status==="working") return <span className="pill working" style={{"--c":c}}>working <span className="dots"><i/><i/><i/></span></span>;
+  if(status==="done") return <span className="pill done">done ✓</span>;
+  return <span className="pill">idle</span>;
+}
+function AgentCard({id, a}){
+  const m = META[id];
+  return (
+    <div className={"agent "+(a.status!=="idle"?"active ":"")+(a.status==="working"?"working":"")} style={{"--c":m.c}}>
+      <div className="ag-top">
+        <div className="ag-av">{m.icon}</div>
+        <div><div className="ag-name">{m.name}</div><div className="ag-role">{m.role}</div></div>
+        <Pill status={a.status} c={m.c} />
+      </div>
+      {a.tools.length>0 &&
+        <div className="tools">{a.tools.map((t,i)=>(
+          <div className="tool" key={i}>
+            {t.done ? <span className="tick">✓</span> : <span className="spinr" style={{"--c":m.c}} />}
+            <span className="tn">{t.tool}</span>
+            <span style={{color:"var(--low)"}}>({fmtArgs(t.args)})</span>
+            {t.out && <span className="out">→ {t.out}</span>}
+          </div>))}
+        </div>}
+      {a.verdict && <div className="verdict">{a.verdict}</div>}
+    </div>
+  );
+}
+function Console({log}){
+  const ref = useRef(null);
+  useEffect(()=>{ if(ref.current) ref.current.scrollTop = ref.current.scrollHeight; }, [log]);
+  return (
+    <div className="console">
+      <div className="bar"><span className="d" style={{background:"#f43f5e"}}/><span className="d" style={{background:"#f5a524"}}/>
+        <span className="d" style={{background:"#22c55e"}}/>&nbsp;live activity log</div>
+      <div className="log" ref={ref}>
+        {log.length===0 && <div className="empty">— waiting to run —</div>}
+        {log.map((l,i)=>(<div className={"ln "+l.kind} key={i}><span className="ts">{l.ts}</span><span className="msg">{l.text}</span></div>))}
+      </div>
+    </div>
+  );
+}
+function Decision({s, onDecide}){
+  if(s.referred && !s.decision) return (
+    <div className="decision refer">
+      <div className="big">⏸️ Referred to you</div>
+      <div className="sub">The agents recommend <b style={{color:"var(--refer)"}}>{s.recommendation}</b> — {s.rationale}</div>
+      <div className="gate">
+        <button className="yes" onClick={()=>onDecide("approve")}>✅ Approve</button>
+        <button className="no" onClick={()=>onDecide("decline")}>❌ Decline</button>
+      </div>
+    </div>);
+  const d = s.decision, cls = d==="APPROVED"?"approve":"decline", ic = d==="APPROVED"?"✅":"❌";
+  return (<div className={"decision "+cls}><div className="big">{ic} {d}</div>
+    <div className="sub">{s.humanFinal ? "final call made by you" : s.rationale}</div></div>);
+}
+
+function App(){
+  const [f, setF] = useState({name:"Ravi Menon", income:120000, cibil:720, amount:4000000, tenure:20, purpose:"home"});
+  const [s, setS] = useState({agents:blank(), log:[], recommendation:null, rationale:null, referred:false, threadId:null, decision:null, running:false, humanFinal:false});
+  const set = (k,v)=> setF(p=>({...p,[k]:v}));
+
+  function push(kind, text){ setS(p=>({...p, log:[...p.log, {ts:now(), kind, text}]})); }
+  function onEvent(e){
+    setS(p=>{
+      const S = {...p, agents:{...p.agents}};
+      const A = id => { S.agents[id] = {...S.agents[id], tools:[...S.agents[id].tools]}; return S.agents[id]; };
+      const log = (kind,text) => { S.log = [...S.log, {ts:now(), kind, text}]; };
+      if(e.t==="agent_start"){ A(e.id).status="working"; log("start", `${e.name} started analysing the application`); }
+      else if(e.t==="tool_start"){ A(e.id).tools.push({tool:e.tool, args:e.args, done:false}); log("tool", `${META[e.id].name} → calling ${e.tool}(${fmtArgs(e.args)})`); }
+      else if(e.t==="tool_end"){ const a=A(e.id); for(let i=a.tools.length-1;i>=0;i--){ if(a.tools[i].tool===e.tool && !a.tools[i].done){ a.tools[i]={...a.tools[i], done:true, out:e.out}; break; } } log("result", `${e.tool} returned ${e.out}`); }
+      else if(e.t==="agent_done"){ const a=A(e.id); a.status="done"; a.verdict=e.verdict; log("done", `${META[e.id].name} finished`); }
+      else if(e.t==="supervisor"){ S.recommendation=e.recommendation; S.rationale=e.rationale; log("super", `Chief Underwriter ruling → ${e.recommendation}`); }
+      else if(e.t==="referred"){ S.referred=true; S.threadId=e.thread_id; S.recommendation=e.recommendation; S.rationale=e.rationale; log("refer", "Borderline — referred to a human for the final call"); }
+      else if(e.t==="decision"){ S.decision=e.decision; log("decision", `Decision: ${e.decision}`); }
+      else if(e.t==="done"){ S.running=false; }
+      return S;
+    });
+  }
+
+  async function run(){
+    setS({agents:blank(), log:[], recommendation:null, rationale:null, referred:false, threadId:null, decision:null, running:true, humanFinal:false});
+    const resp = await fetch(API+"/api/stream", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(f)});
+    const reader = resp.body.getReader(); const dec = new TextDecoder(); let buf="";
+    while(true){
+      const {value, done} = await reader.read(); if(done) break;
+      buf += dec.decode(value, {stream:true}); let i;
+      while((i = buf.indexOf("\n")) >= 0){ const line = buf.slice(0,i); buf = buf.slice(i+1); if(line.trim()) onEvent(JSON.parse(line)); }
+    }
+  }
+  async function decide(verdict){
+    push("decision", `You chose to ${verdict}…`);
+    const r = await fetch(API+"/api/resume", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify({thread_id:s.threadId, verdict})});
+    const d = (await r.json()).decision;
+    setS(p=>({...p, decision:d, humanFinal:true, log:[...p.log, {ts:now(), kind:"decision", text:`Decision: ${d}`}]}));
+  }
+
+  const st = s.agents;
+  const steps = [
+    {k:"Credit", c:"var(--credit)", st:st.credit.status},
+    {k:"Policy", c:"var(--policy)", st:st.policy.status},
+    {k:"Fraud",  c:"var(--fraud)",  st:st.fraud.status},
+    {k:"Underwriter", c:"var(--cyan)", st: s.recommendation ? "done" : (st.fraud.status==="done" ? "working":"idle")},
+    {k:"Decision", c:"var(--approve)", st: (s.decision||s.referred) ? "done":"idle"},
+  ];
+  const started = s.running || s.decision || s.referred;
+
+  return (
+    <div className="wrap">
+      <div className="hd">
+        <div className="logo">🏦</div>
+        <div>
+          <h1>Meridian Bank · Loan Underwriting Desk</h1>
+          <p>Three specialist AI agents investigate every application — watch each one reason and call its tools, live.</p>
+        </div>
+        <div className={"live"+(s.running?" on":"")}><span className="pulse"/>{s.running?"agents working":"idle"}</div>
+      </div>
+
+      <div className="stepper">
+        {steps.map((sp,i)=>(
+          <React.Fragment key={i}>
+            <div className={"step "+sp.st} style={{"--c":sp.c}}>
+              <div className="bub">{sp.st==="done"?"✓":i+1}</div>{sp.k}
+            </div>
+            {i<steps.length-1 && <div className={"conn"+(steps[i].st==="done"?" fill":"")} />}
+          </React.Fragment>
+        ))}
+      </div>
+
+      <div className="grid">
+        <div className="panel">
+          {[["name","Applicant","text"],["income","Monthly income ₹","number"],["cibil","CIBIL score","number"],
+            ["amount","Loan amount ₹","number"],["tenure","Tenure (years)","number"],["purpose","Purpose","text"]].map(([k,l,t])=>(
+            <div className="field" key={k}><label>{l}</label>
+              <input type={t} value={f[k]} onChange={e=>set(k, t==="number"?Number(e.target.value):e.target.value)} /></div>
+          ))}
+          <button className={"run"+(s.running?" busy":"")} onClick={run} disabled={s.running}>
+            <span className="shim"/>{s.running?"Agents investigating…":"▶  Run underwriting"}</button>
+        </div>
+
+        <div>
+          {!started && <div className="panel empty-r">Fill the form and run the desk — the agents will appear here and work one by one, live.</div>}
+          {started && <div>{IDS.map(id=><AgentCard key={id} id={id} a={st[id]} />)}</div>}
+          {(s.decision || s.referred) && <Decision s={s} onDecide={decide} />}
+          {started && <div style={{marginTop:14}}><Console log={s.log} /></div>}
+        </div>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

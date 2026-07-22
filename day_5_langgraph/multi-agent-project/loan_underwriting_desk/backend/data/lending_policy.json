@@ -1,0 +1,84 @@
+{
+  "meta": {
+    "document": "Meridian Bank — Retail & MSME Lending Policy Manual",
+    "version": "7.3",
+    "effective_from": "2026-04-01",
+    "review_cycle": "annual",
+    "owner": "Credit Policy & Risk Management Group",
+    "regulatory_basis": ["RBI Master Direction on Priority Sector Lending", "RBI External Benchmark Lending Rate framework", "PMLA 2002", "Fair Practices Code"],
+    "currency": "INR",
+    "amount_units": "figures expressed in lakh unless stated otherwise"
+  },
+  "policies": [
+    {"id": "hl-elig", "text": "Home loans require a minimum CIBIL score of 700. The EMI must not exceed 50% of monthly income. Maximum tenure is 30 years."},
+    {"id": "hl-rate", "text": "Home loan interest starts at 8.4% per annum for CIBIL 750 and above, and 8.9% for CIBIL between 700 and 749."},
+    {"id": "pl-elig", "text": "Personal loans require a CIBIL score of 750 or above, an EMI under 40% of monthly income, and a maximum tenure of 5 years."},
+    {"id": "aml-ddue", "text": "Any loan above 50 lakh requires enhanced due diligence and source-of-funds verification before approval."},
+    {"id": "fraud-cap", "text": "Applications where the requested amount exceeds 60 times the monthly income are automatically flagged for manual review."},
+
+    {"id": "hl-ltv-low", "text": "For home loans up to 30 lakh, the maximum loan-to-value ratio is 90% of the registered property value. The borrower must fund the remaining 10% as own contribution (margin)."},
+    {"id": "hl-ltv-mid", "text": "For home loans above 30 lakh and up to 75 lakh, the maximum loan-to-value ratio is 80%. Stamp duty and registration charges are excluded from the property value used for LTV computation."},
+    {"id": "hl-ltv-high", "text": "For home loans above 75 lakh, the maximum loan-to-value ratio is 75%. An independent panel valuation is mandatory and the lower of the valuer's estimate and the sale agreement value is used."},
+    {"id": "hl-coapp", "text": "A co-applicant is mandatory where the property is jointly owned, and the spouse's income may be clubbed to improve eligibility. All co-owners of the property must be co-applicants on the loan."},
+    {"id": "hl-age", "text": "For home loans the applicant must be at least 21 years old at sanction and the loan must fully close before the applicant turns 70 or reaches superannuation, whichever is earlier."},
+    {"id": "hl-under-const", "text": "For under-construction properties, disbursement is linked to construction stages certified by the panel engineer, and pre-EMI interest is charged on the disbursed amount until the final tranche is released."},
+
+    {"id": "pl-rate", "text": "Personal loan interest ranges from 10.5% per annum for salaried applicants with CIBIL 800 and above, to 18% per annum for CIBIL between 750 and 769. Rates are fixed for the full tenure."},
+    {"id": "pl-cap", "text": "The maximum unsecured personal loan is capped at 40 lakh or 15 times the applicant's net monthly income, whichever is lower."},
+    {"id": "pl-tenure", "text": "Personal loan tenure ranges from 12 to 60 months. Applicants above 58 years of age are restricted to a maximum tenure of 36 months."},
+    {"id": "pl-emp", "text": "Salaried personal loan applicants must have at least 2 years of total work experience and a minimum of 6 months in the current organisation. Self-employed applicants must show 3 years of business continuity."},
+
+    {"id": "al-elig", "text": "Auto loans (new vehicles) require a minimum CIBIL score of 680, an EMI-to-income ratio under 45%, and a maximum tenure of 7 years. Financing covers up to 90% of the on-road price."},
+    {"id": "al-used", "text": "Used-vehicle loans are available for cars up to 8 years old at loan closure, financing up to 75% of the valuation certificate value, with a maximum tenure of 5 years and a minimum CIBIL of 700."},
+    {"id": "al-rate", "text": "Auto loan interest starts at 8.9% per annum for new vehicles with CIBIL 760 and above; used-vehicle loans are priced 250 to 400 basis points higher depending on vehicle age."},
+    {"id": "al-hypo", "text": "The financed vehicle is hypothecated to Meridian Bank, and the bank's charge must be noted in the RC book with the Regional Transport Office before the second disbursement stage."},
+
+    {"id": "el-elig", "text": "Education loans up to 7.5 lakh for studies in India require no collateral, only a co-applicant (parent or guardian). Loans above 7.5 lakh require tangible collateral or a third-party guarantee."},
+    {"id": "el-moratorium", "text": "Education loans carry a moratorium covering the course duration plus 12 months, during which interest accrues but repayment of principal is deferred. Servicing simple interest during the moratorium earns a 1% concession on the applicable rate."},
+    {"id": "el-abroad", "text": "For overseas education, the loan may cover up to 100% of tuition, living expenses, travel and a laptop, subject to a ceiling of 1.5 crore. A margin of 15% of expenses is required for studies abroad."},
+
+    {"id": "lap-elig", "text": "Loan against residential or commercial property (LAP) is offered up to 65% of the assessed market value, with a maximum tenure of 15 years and a minimum applicant CIBIL score of 720."},
+    {"id": "lap-purpose", "text": "Loan-against-property funds may be used for business expansion, education, medical needs or debt consolidation, but must not be used for speculative activities, capital-market trading, or purposes prohibited under RBI guidelines."},
+
+    {"id": "gl-elig", "text": "Gold loans are sanctioned up to 75% of the value of pledged gold ornaments (18 to 22 carat), computed on the 30-day average closing price published by the India Bullion and Jewellers Association."},
+    {"id": "gl-tenure", "text": "Gold loans have a maximum tenure of 12 months with bullet or EMI repayment options. If the loan-to-value breaches 85% due to a fall in gold prices, the borrower must pledge additional gold or part-prepay within 7 days."},
+
+    {"id": "msme-elig", "text": "MSME working-capital and term loans up to 25 lakh are extended under the CGTMSE collateral-free scheme. Facilities above 25 lakh require primary security and, where applicable, collateral of at least 40% of the exposure."},
+    {"id": "msme-docs", "text": "MSME term loans require the last two years of audited financials, the most recent 12 months of bank statements, GST returns for the past 4 quarters, and a Udyam registration certificate."},
+    {"id": "msme-dscr", "text": "For MSME term loans the projected debt-service coverage ratio must be at least 1.25, and the current ratio should not fall below 1.20 after drawdown of the proposed facility."},
+
+    {"id": "foir-salaried", "text": "The Fixed Obligation to Income Ratio (FOIR) for salaried applicants, including the proposed EMI and all existing loan obligations, must not exceed 55% of net monthly income. Applicants earning above 2 lakh per month may be permitted up to 60% at the underwriter's discretion."},
+    {"id": "foir-selfemp", "text": "For self-employed applicants, FOIR is assessed on average declared income from the last two Income Tax Returns and must not exceed 50%. Income is considered net of taxes and depreciation add-backs are capped at 50% of the depreciation claimed."},
+
+    {"id": "cibil-thin", "text": "Applicants with no credit history (a CIBIL score of -1 or a thin file) are assessed on surrogate parameters such as banking turnover, rental history, and salary stability, and are capped at 50% of the standard eligible loan amount."},
+    {"id": "cibil-dpd", "text": "Any account showing 90 or more days past due (DPD) in the last 24 months, or a settled/written-off status on the bureau report, requires escalation to a senior credit committee before sanction."},
+    {"id": "cibil-enquiry", "text": "More than 6 hard credit enquiries in the preceding 3 months is treated as a credit-hungry signal and warrants additional scrutiny of the applicant's repayment intent and existing obligations."},
+
+    {"id": "income-doc-sal", "text": "Salaried applicants must submit the last 3 salary slips, Form 16 for the previous financial year, and 6 months of salary-account bank statements. Cash-salary components not credited to a bank account are not considered for eligibility."},
+    {"id": "income-doc-self", "text": "Self-employed applicants must submit 2 years of ITRs with computation of income, audited profit-and-loss and balance sheet, and 12 months of current-account statements. GST-registered businesses must additionally provide GST returns."},
+
+    {"id": "kyc-mandatory", "text": "Full KYC — officially valid identity proof, current address proof, PAN, and a recent photograph — is mandatory for every applicant and co-applicant before disbursement. PAN and Aadhaar seeding must be verified against the respective databases."},
+    {"id": "aml-pep", "text": "Applicants identified as Politically Exposed Persons (PEPs) or their close associates require senior-management approval, enhanced due diligence, and continuous transaction monitoring for the life of the loan."},
+    {"id": "aml-cash", "text": "Cash deposits exceeding 10 lakh in the applicant's account within the 3 months preceding the application must be explained with a documented source of funds. Unexplained large credits are grounds for declining the loan."},
+    {"id": "aml-sanctions", "text": "Every applicant, co-applicant and guarantor is screened against RBI, UN, OFAC and internal watchlists. A confirmed name match on any sanctions list results in immediate rejection and filing of a suspicious transaction report."},
+
+    {"id": "fraud-velocity", "text": "Three or more loan applications from the same applicant across Meridian Bank channels within 30 days, or multiple applications sharing the same mobile number, email or device fingerprint, are routed to the fraud-control unit."},
+    {"id": "fraud-docs", "text": "Any evidence of tampered salary slips, mismatched employer verification, forged property documents, or inconsistent signatures triggers an immediate hold on the application and a mandatory field investigation."},
+    {"id": "fraud-address", "text": "A mismatch between the declared residence and the address on record with the credit bureau, or a non-contactable applicant during tele-verification, downgrades the application and requires a physical residence-verification visit."},
+
+    {"id": "collateral-val", "text": "All immovable collateral must be valued by two empanelled valuers where the exposure exceeds 1 crore, and the lower of the two valuations is adopted. Valuation reports older than 6 months are not accepted at sanction."},
+    {"id": "collateral-legal", "text": "A clear and marketable title, confirmed by a search report from an empanelled advocate covering the last 30 years, is mandatory before creating a mortgage. Properties with pending litigation or unauthorised construction are not accepted as security."},
+    {"id": "collateral-insurance", "text": "Property and vehicle collateral must be insured for the full reinstatement value with Meridian Bank noted as the loss payee, and the policy must be renewed annually for the life of the loan."},
+
+    {"id": "pricing-eblr", "text": "All floating-rate retail loans are linked to the External Benchmark Lending Rate (EBLR), reset within 3 months of a change in the RBI repo rate. The applicable spread is a function of the loan-to-value, credit score, and product risk grade."},
+    {"id": "pricing-fees", "text": "Processing fees are up to 1% of the sanctioned amount (minimum 3,500) for home loans and up to 2% for personal loans, plus applicable GST. Fees for pre-approved offers may be waived at the bank's discretion."},
+    {"id": "prepay-floating", "text": "No prepayment or foreclosure charges apply to floating-rate loans sanctioned to individual borrowers. Fixed-rate personal and auto loans attract a foreclosure charge of up to 4% of the outstanding principal."},
+
+    {"id": "restructure-hardship", "text": "Borrowers facing genuine, documented financial hardship may be offered restructuring — tenure extension, an EMI moratorium of up to 6 months, or step-up repayment — subject to credit-committee approval and reporting of the restructured status to credit bureaus."},
+    {"id": "npa-classify", "text": "A retail loan account is classified as a Non-Performing Asset (NPA) when principal or interest remains overdue for more than 90 days. Recovery proceedings, including action under the SARFAESI Act for secured loans, are initiated per the bank's recovery policy."},
+
+    {"id": "insurance-life", "text": "Applicants for home and education loans are offered, but not compelled to buy, a loan-protection life-insurance cover for the sanctioned amount. Bundling of insurance must never be a condition of loan approval."},
+    {"id": "cooling-period", "text": "An applicant declined on credit or fraud grounds may reapply only after a 90-day cooling period, and must disclose the previous decline. Re-application within the cooling period is auto-rejected unless materially new information is provided."},
+    {"id": "delegation", "text": "Sanctioning authority is tiered: branch managers may approve retail loans up to 25 lakh, regional credit heads up to 1 crore, and exposures above 1 crore require the Head Office Credit Committee. No officer may sanction a loan to a related party."}
+  ]
+}
